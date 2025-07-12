@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🧭 Roadmap – Jeu de Gestion de Transport</title>
+  <title>Accueil – GlobalTransit Tycoon</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -14,6 +14,7 @@
       margin: 0;
       padding: 0;
       position: relative;
+      min-height: 100vh;
     }
     body::before {
       content: "";
@@ -23,397 +24,1167 @@
       z-index: 0;
       pointer-events: none;
     }
-    main, header {
+    .container {
       position: relative;
       z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    header {
+    .nav-menu {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.15);
+      z-index: 100;
+      display: flex;
+      gap: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    .nav-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      background: #e0e7ff;
+      transform: translateY(-1px);
+    }
+    .nav-link.active {
       background: #2563eb;
       color: #fff;
-      padding: 2rem 1rem 1rem 1rem;
-      border-bottom-left-radius: 24px;
-      border-bottom-right-radius: 24px;
-      box-shadow: 0 4px 24px rgba(37,99,235,0.08);
     }
-    header h1 {
-      margin: 0 0 0.5rem 0;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+      margin-top: 80px;
     }
-    header p {
-      margin: 0;
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
+    .logo {
+      height: 110px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px rgba(30,40,90,0.10);
+      border-radius: 18px;
       background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 32px rgba(30,40,90,0.10);
-      padding: 2rem 1.5rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    section {
-      margin-bottom: 2.5rem;
-    }
-    h2 {
+    .main-title {
       color: #2563eb;
-      margin-top: 0;
-      font-size: 1.4rem;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(37,99,235,0.08);
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .content {
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 32px rgba(30,40,90,0.10);
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section:last-child {
+      margin-bottom: 0;
+    }
+    .section-title {
+      color: #2563eb;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
       border-left: 4px solid #2563eb;
-      padding-left: 0.5rem;
+      padding-left: 0.8rem;
+      line-height: 1.3;
+    }
+    .section-content {
+      line-height: 1.7;
+      color: #334155;
       margin-bottom: 1rem;
     }
-    ul, ol {
-      margin: 0 0 1rem 1.5rem;
-      padding: 0;
+    .section-content ul {
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
     }
-    li {
+    .section-content li {
       margin-bottom: 0.5rem;
-      line-height: 1.6;
     }
-    .phase {
+    .highlight {
       background: #e0e7ff;
-      border-left: 6px solid #2563eb;
+      padding: 1.2rem;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.04);
-      padding: 1rem 1.2rem;
-      margin-bottom: 1.5rem;
-      transition: box-shadow 0.3s, background 0.3s;
+      margin: 1rem 0;
+      border-left: 6px solid #2563eb;
+      font-size: 0.95rem;
     }
-    .phase:hover {
-      box-shadow: 0 6px 24px rgba(37,99,235,0.13);
-      background: #dbeafe;
+    .support-box {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 0;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.15);
+      text-align: center;
+      flex: 1;
+      margin-right: 1rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .phase h3 {
-      margin-top: 0;
-      font-size: 1.1rem;
-      color: #1a237e;
+    .support-box:last-child {
+      margin-right: 0;
     }
-    .checklist {
-      list-style: none;
-      padding-left: 0;
+    .support-title {
+      color: #166534;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
-    .checklist li {
+    .support-content {
+      color: #15803d;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .support-btn {
+      background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .support-btn:hover {
+      background: linear-gradient(90deg, #16a34a 0%, #15803d 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+    }
+    .discord-box {
+      background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
+      border: 2px solid #5865f2;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 0;
+      box-shadow: 0 4px 20px rgba(88,101,242,0.15);
+      text-align: center;
+      flex: 1;
+      margin-right: 1rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .discord-title {
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .discord-content {
+      color: #e0e7ff;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .discord-btn {
+      background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);
+      color: #5865f2;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .discord-btn:hover {
+      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+    }
+    .premium-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 0;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.15);
+      text-align: center;
+      flex: 1;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .premium-title {
+      color: #92400e;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .premium-content {
+      color: #78350f;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .premium-btn {
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .premium-btn:hover {
+      background: linear-gradient(90deg, #d97706 0%, #b45309 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245,158,11,0.3);
+    }
+    
+    /* Popup styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .popup-content {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 3px solid #f59e0b;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(245,158,11,0.3);
       position: relative;
-      padding-left: 2.2em;
-      margin-bottom: 0.4em;
+      animation: popupSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes popupSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    .popup-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .popup-title {
+      color: #92400e;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .popup-subtitle {
+      color: #78350f;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #92400e;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    
+    .popup-close:hover {
+      background: rgba(245,158,11,0.2);
+      transform: scale(1.1);
+    }
+    
+    .premium-features {
+      margin: 1.5rem 0;
+    }
+    
+    .feature-item {
       display: flex;
       align-items: center;
-      transition: background 0.3s, color 0.3s;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .checklist li:hover {
-      background: #dbeafe;
-    }
-    .checklist input[type="checkbox"] {
-      position: absolute;
-      left: 0;
-      width: 1.3em;
-      height: 1.3em;
-      accent-color: #2563eb;
-      margin-right: 0.7em;
-      cursor: pointer;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(30,40,90,0.08);
-      transition: box-shadow 0.2s, border 0.2s;
-      border: 2px solid #93c5fd;
-      background: #fff;
-    }
-    .checklist input[type="checkbox"]:hover {
-      box-shadow: 0 0 0 3px #b3baf7;
-      border: 2px solid #3949ab;
-    }
-    .checklist input[type="checkbox"]:checked {
-      accent-color: #22c55e;
-      border: 2px solid #22c55e;
-      background: #dcfce7;
-    }
-    .checklist input[type="checkbox"]:focus {
-      outline: 2px solid #facc15;
-      outline-offset: 2px;
-    }
-    .checklist input[type="checkbox"]:checked + span {
-      color: #43a047;
-      text-decoration: line-through;
-    }
-    .checklist li.checked {
-      background: #dcfce7;
-      color: #22c55e;
-      text-decoration: line-through;
-    }
-    .checklist li span {
-      transition: color 0.3s, text-decoration 0.3s;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      background: #f8fafc;
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      background: rgba(255,255,255,0.6);
       border-radius: 10px;
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .feature-icon {
+      font-size: 1.2rem;
+      margin-right: 0.8rem;
+      color: #f59e0b;
+    }
+    
+    .feature-text {
+      color: #78350f;
+      font-weight: 500;
+    }
+    
+    .premium-preview {
+      background: linear-gradient(45deg, #fef3c7, #fde68a, #fef3c7);
+      border: 2px solid #f59e0b;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      text-align: center;
+      position: relative;
       overflow: hidden;
     }
-    th, td {
-      padding: 0.6em 0.4em;
-      text-align: center;
-      border-bottom: 1px solid #e0e0e0;
+    
+    .premium-preview::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
     }
-    th {
-      background: #2563eb;
-      color: #fff;
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+    
+    .premium-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
       font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.3);
     }
-    tr:last-child td {
-      border-bottom: none;
+    
+    /* Bouton retour en haut */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+      color: white;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 6px 25px rgba(30,64,175,0.4), inset 0 2px 10px rgba(255,255,255,0.2);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transform: scale(0.5) translateY(20px);
+      pointer-events: none;
     }
-    .emoji {
-      font-size: 1.2em;
-      margin-right: 0.3em;
+    
+    .scroll-to-top:hover {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #1e40af 100%);
+      transform: translateY(-5px) scale(1.15);
+      box-shadow: 0 10px 35px rgba(6,182,212,0.5), inset 0 2px 10px rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
     }
-    .next-step {
-      background: #fef9c3;
-      border-left: 6px solid #facc15;
+    
+    .scroll-to-top.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+    
+    /* Version badge */
+    .version-badge {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+      color: white;
+      padding: 0.4rem 0.8rem;
       border-radius: 8px;
-      padding: 1rem 1.2rem;
-      margin-top: 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(100,116,139,0.3);
+      z-index: 150;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      transition: all 0.2s ease;
     }
-    .next-step ul {
-      margin: 0.5rem 0 0 1.5rem;
+    
+    .version-badge:hover {
+      background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(100,116,139,0.4);
+      cursor: pointer;
+    }
+    
+    /* Popup historique des versions */
+    .version-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .version-popup-content {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border: 2px solid #64748b;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(100,116,139,0.3);
+      position: relative;
+      animation: popupSlideIn 0.3s ease-out;
+    }
+    
+    .version-popup-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .version-popup-title {
+      color: #475569;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .version-popup-subtitle {
+      color: #64748b;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .version-popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    
+    .version-popup-close:hover {
+      background: rgba(100,116,139,0.2);
+      transform: scale(1.1);
+    }
+    
+    .version-item {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(100,116,139,0.1);
+    }
+    
+    .version-number {
+      color: #475569;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .version-date {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .version-description {
+      color: #475569;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    /* Tooltip pour les versions */
+    .version-tooltip {
+      position: absolute;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-width: 350px;
+      z-index: 3500;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Popup de bienvenue */
+    .welcome-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2500;
+      backdrop-filter: blur(8px);
+    }
+    
+    .welcome-popup-content {
+      background: linear-gradient(135deg, #2563eb 0%, #22c55e 100%);
+      border: 3px solid #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(37,99,235,0.4);
+      position: relative;
+      animation: welcomeSlideIn 0.5s ease-out;
+    }
+    
+    @keyframes welcomeSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.7) translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    .welcome-popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .welcome-popup-close:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+    
+    .welcome-title {
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .welcome-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+    }
+    
+    .welcome-features {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin: 1.2rem 0;
+      text-align: left;
+    }
+    
+    .welcome-features h3 {
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+    
+    .welcome-features ul {
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+    
+    .welcome-features li {
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+    
+    .welcome-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 0.7rem 1.8rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.8rem;
+    }
+    
+    .welcome-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .version-tooltip.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .version-tooltip::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 8px solid #1e293b;
+    }
+    
+    .btn-play {
+      background: linear-gradient(90deg, #2563eb 60%, #22c55e 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      max-width: 200px;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.13);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      margin: 1rem auto;
+      display: block;
+      text-decoration: none;
+    }
+    .btn-play:hover, .btn-play:focus {
+      background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 32px rgba(34,197,94,0.18);
+      outline: none;
+    }
+    .footer {
+      text-align: center;
+      color: #2563eb;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .boxes-container {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
     }
     @media (max-width: 600px) {
-      main {
-        padding: 1rem 0.3rem;
-      }
-      table, th, td {
-        font-size: 0.95em;
-      }
+      .main-title { font-size: 1.8rem; }
+      .logo { height: 70px; }
+      .btn-play { font-size: 0.9rem; padding: 0.6rem 1rem; max-width: 180px; }
+      .content { padding: 1.2rem; }
+      .section-title { font-size: 1.2rem; }
+      .section-content { font-size: 0.95rem; }
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.checklist input[type="checkbox"]').forEach(function(checkbox) {
-        function updateChecked() {
-          if (checkbox.checked) {
-            checkbox.parentElement.classList.add('checked');
-          } else {
-            checkbox.parentElement.classList.remove('checked');
-          }
-        }
-        checkbox.addEventListener('change', updateChecked);
-        // Initial state
-        updateChecked();
-      });
-    });
-  </script>
 </head>
 <body>
-  <header style="display: flex; align-items: center; gap: 1.2rem; position: relative;">
-    <img src="Logo.png" alt="Logo GlobalTransit Tycoon" style="height:80px;box-shadow:0 2px 12px rgba(30,40,90,0.10);border-radius:16px;background:#fff;flex-shrink:0;">
-    <div style="flex:1;">
-      <h1 style="margin-top:0;margin-bottom:0.5rem;text-align:center;">🧭 Roadmap complète – Jeu de Gestion de Transport</h1>
-      <p style="margin:0;text-align:center;">Plan de développement pour un jeu de gestion de réseaux de transport (marchandises & passagers)</p>
+  <!-- Version badge -->
+  <div class="version-badge" onclick="openVersionPopup()">V.0.1</div>
+
+  <!-- Tooltip pour les versions -->
+  <div class="version-tooltip" id="versionTooltip">
+    <strong>🎉 Version initiale</strong><br><br>
+    • Système de navigation principal<br>
+    • Page d'accueil avec présentation du concept<br>
+    • Popup d'aperçu du Pass Premium<br>
+    • Badge de version avec popup d'historique<br>
+    • Accès à la communauté Discord<br>
+    • Renvoi vers la cagnotte en ligne Leetchi<br>
+    • Bouton de retour en haut de page (globe)<br>
+    • Frise chronologique des versions<br>
+    • Tooltip interactif au survol (Nuage)<br>
+    • Popup de bienvenue au chargement
+  </div>
+
+
+
+  <!-- Popup de bienvenue -->
+  <div class="welcome-popup-overlay" id="welcomePopup">
+    <div class="welcome-popup-content">
+      <h1 class="welcome-title">Bienvenue dans l'aventure GlobalTransit Tycoon</h1>
+      
+      <button class="welcome-btn" onclick="closeWelcomePopup()">
+        🚀 Commencer l'aventure !
+      </button>
     </div>
-  </header>
-  <main>
-    <section>
-      <h2>🎯 Objectif du jeu</h2>
-      <p>
-        Le joueur incarne un gestionnaire de réseaux de transport. Il doit construire, développer et optimiser des infrastructures pour transporter efficacement des marchandises et des personnes à travers une carte composée de villes, ports, gares et aéroports.
-      </p>
-    </section>
+  </div>
 
-    <section>
-      <h2>⚙️ Technologies principales</h2>
-      <ul>
-        <li><b>HTML</b> : structure du jeu</li>
-        <li><b>CSS</b> : interface graphique, design responsive</li>
-        <li><b>JavaScript</b> : logique du jeu, événements, simulation</li>
-        <li><i>(optionnel plus tard : localStorage, IndexedDB ou backend pour sauvegarder)</i></li>
-      </ul>
-    </section>
+  <nav class="nav-menu">
+    <a href="#concept" class="nav-link">🎮 Concept</a>
+    <a href="#don" class="nav-link">💚 Don</a>
+    <a href="#discord" class="nav-link">💬 Discord</a>
+    <a href="#premium" class="nav-link">🚧 Premium</a>
+  </nav>
 
-    <section>
-      <h2>📌 Phases de développement</h2>
+  <div class="container">
+    <div class="header">
+      <img src="Logo.png" alt="Logo GlobalTransit Tycoon" class="logo">
+      <h1 class="main-title">🎮 GlobalTransit Tycoon</h1>
+      <div class="subtitle">🧭 Devenez le maître des mobilités mondiales</div>
+      <a href="interface.html" class="btn-play">🚀 Entrer dans le jeu</a>
+    </div>
 
-      <div class="phase">
-        <h3>🏗️ PHASE 1 : Base du jeu (Fondations)</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Page de démarrage avec menu : "Nouvelle partie", "Charger", "Options"</span></li>
-          <li><input type="checkbox"><span>Carte interactive (grille, canvas ou DOM)</span></li>
-          <li><input type="checkbox"><span>Interface utilisateur (barre d’info, budget, temps, notifications)</span></li>
-          <li><input type="checkbox"><span>Système de temps : jours, semaines, années</span></li>
-          <li><input type="checkbox"><span>Système de monnaie et d'économie de base</span></li>
-        </ul>
+    <div class="content">
+      <div class="section" id="concept">
+        <div class="section-content">
+          Dans GlobalTransit Tycoon, vous incarnez un magnat de la logistique et du transport prêt à conquérir le monde grâce à un réseau multimodal ultra-efficace. De la route aux airs, en passant par les rails et les mers, développez un empire de transport capable de faire circuler marchandises et passagers aux quatre coins du globe.
+        </div>
+        <div class="highlight">
+          <strong>Votre mission :</strong> bâtir, gérer, et optimiser des infrastructures intelligentes pour répondre aux besoins croissants de populations toujours plus mobiles et d'une économie mondialisée.
+        </div>
       </div>
 
-      <div class="phase">
-        <h3>🚚 PHASE 2 : Transport de marchandises</h3>
-        <b>Types de transport :</b>
-        <ul>
-          <li>Camions : transport local</li>
-          <li>Bateaux cargo : international, inter-villes portuaires</li>
-          <li>Avions cargo : rapide, coûteux</li>
-          <li>Trains de fret : grande capacité, régional/national</li>
-        </ul>
-        <b>Fonctions :</b>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Créer entrepôts, ports, aéroports, terminaux ferroviaires</span></li>
-          <li><input type="checkbox"><span>Relier les points avec routes, rails, lignes maritimes ou aériennes</span></li>
-          <li><input type="checkbox"><span>Gérer la demande de ressources (ex : "bois vers Ville A")</span></li>
-          <li><input type="checkbox"><span>Affecter des véhicules à des trajets</span></li>
-          <li><input type="checkbox"><span>Coûts : carburant, maintenance, salaires, taxes</span></li>
-          <li><input type="checkbox"><span>Optimisation des itinéraires</span></li>
-        </ul>
+      <div class="section" id="construction">
+        <h2 class="section-title">🏗️ Construisez votre empire</h2>
+        <div class="section-content">
+          <ul>
+            <li>Installez gares, ports, aéroports, routes, voies ferrées et arrêts urbains.</li>
+            <li>Connectez villes, zones industrielles et hubs logistiques pour répondre à la demande en temps réel.</li>
+            <li>Adaptez vos choix stratégiques à la géographie, à la densité urbaine et aux ressources locales.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="phase">
-        <h3>🧍 PHASE 3 : Transport de personnes</h3>
-        <b>Types de transport :</b>
-        <ul>
-          <li>Taxis : transport individuel, flexible</li>
-          <li>Bus : lignes urbaines fixes</li>
-          <li>Covoiturage : semi-automatisé</li>
-          <li>Avions passagers : vols commerciaux</li>
-          <li>Trains passagers : local (TER) ou grande vitesse (TGV)</li>
-        </ul>
-        <b>Fonctions :</b>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Construire arrêts de bus, gares ferroviaires, terminaux aériens</span></li>
-          <li><input type="checkbox"><span>Créer des lignes avec horaires et fréquences</span></li>
-          <li><input type="checkbox"><span>Gérer les tarifs des billets</span></li>
-          <li><input type="checkbox"><span>Suivre la satisfaction des passagers</span></li>
-          <li><input type="checkbox"><span>Réagir à la demande : heure de pointe, saisons, événements</span></li>
-          <li><input type="checkbox"><span>Gestion du confort, rapidité, ponctualité</span></li>
-        </ul>
+      <div class="section" id="transport">
+        <h2 class="section-title">🚚 Gérez tous les types de transport</h2>
+        <div class="section-content">
+          <strong>Marchandises :</strong> camions, trains de fret, navires cargos, avions de transport.<br>
+          <strong>Passagers :</strong> bus, taxis, covoiturage, trains express, vols commerciaux.
+          <div class="highlight">
+            Créez des lignes efficaces, équilibrez vos coûts, et assurez la ponctualité pour garder votre réputation intacte.
+          </div>
+        </div>
       </div>
 
-      <div class="phase">
-        <h3>🏙️ PHASE 4 : Croissance des villes et économie</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Les villes croissent selon l’efficacité du réseau</span></li>
-          <li><input type="checkbox"><span>Plus de population = plus de demande en transport</span></li>
-          <li><input type="checkbox"><span>Revenus dynamiques selon activité et satisfaction</span></li>
-          <li><input type="checkbox"><span>Subventions, impôts, concurrence, inflation</span></li>
-          <li><input type="checkbox"><span>Amélioration des infrastructures : vitesse, capacité, coût</span></li>
-        </ul>
+      <div class="section" id="developpement">
+        <h2 class="section-title">📈 Développez votre influence</h2>
+        <div class="section-content">
+          <ul>
+            <li>Faites croître les villes grâce à un transport fluide et écologique.</li>
+            <li>Débloquez de nouvelles technologies : trains à grande vitesse, véhicules électriques, réseaux automatisés.</li>
+            <li>Répondez à des défis dynamiques : pics de fréquentation, catastrophes naturelles, pénuries, événements économiques mondiaux.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="phase">
-        <h3>🚄 PHASE 5 : Transport ferroviaire (marchandises et passagers)</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Construire des voies ferrées</span></li>
-          <li><input type="checkbox"><span>Relier des gares et terminaux de fret</span></li>
-          <li><input type="checkbox"><span>Définir des lignes ferroviaires (express ou omnibus)</span></li>
-          <li><input type="checkbox"><span>Acheter et configurer des trains (vitesse, capacité)</span></li>
-          <li><input type="checkbox"><span>Maintenance du réseau (rails, gares, trains)</span></li>
-          <li><input type="checkbox"><span>Gestion du trafic et des priorités (ex : croisement, horaires)</span></li>
-        </ul>
+      <div class="section" id="objectif">
+        <h2 class="section-title">🎯 Devenez une légende du transport</h2>
+        <div class="section-content">
+          <ul>
+            <li>Commencez modestement dans une petite région… et atteignez la domination mondiale.</li>
+            <li>Choisirez-vous de tout centraliser dans un super-hub ou de décentraliser votre réseau ?</li>
+            <li>Trouverez-vous l'équilibre parfait entre rentabilité, efficacité et satisfaction des usagers ?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="boxes-container">
+      <div class="support-box">
+        <div id="don"></div>
+        <h3 class="support-title">💚 Soutenez le développement</h3>
+        <div class="support-content">
+          <strong>🌟 Aidez-nous à créer le meilleur jeu de transport !</strong><br>
+          Votre soutien nous permet de continuer le développement, d'ajouter de nouvelles fonctionnalités et d'améliorer l'expérience de jeu pour tous.
+        </div>
+        <a href="https://www.leetchi.com/fr/c/soutenez-le-developpement-de-globaltransit-tycoon-1866450?utm_source=copylink&utm_medium=social_sharing" class="support-btn" target="_blank">💝 Faire un don</a>
       </div>
 
-      <div class="phase">
-        <h3>📊 PHASE 6 : Statistiques & simulation avancée</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Graphiques de performance (revenus, flux de passagers, retards)</span></li>
-          <li><input type="checkbox"><span>Événements aléatoires : météo, pannes, grèves, pics de demande</span></li>
-          <li><input type="checkbox"><span>Système de réputation</span></li>
-          <li><input type="checkbox"><span>Objectifs et missions (ex : “Relier 3 villes par train”)</span></li>
-        </ul>
+      <div class="discord-box">
+        <div id="discord"></div>
+        <h3 class="discord-title">💬 Rejoignez notre communauté</h3>
+        <div class="discord-content">
+          <strong>🎮 Connectez-vous avec d'autres joueurs !</strong><br>
+          Rejoignez notre serveur Discord pour échanger, partager vos stratégies, recevoir les dernières nouvelles et participer au développement du jeu.
+        </div>
+        <a href="https://discord.gg/KaW29XefpV" class="discord-btn" target="_blank">📱 Rejoindre Discord</a>
       </div>
 
-      <div class="phase">
-        <h3>💾 PHASE 7 : Sauvegarde, chargement et persistance</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Système de sauvegarde automatique ou manuel (localStorage)</span></li>
-          <li><input type="checkbox"><span>Chargement de partie</span></li>
-          <li><input type="checkbox"><span>Export/import des parties en JSON</span></li>
-        </ul>
+      <div class="premium-box">
+        <div id="premium"></div>
+        <h3 class="premium-title">Pass Premium</h3>
+        <div class="premium-content">
+          <strong>🚧 En développement</strong><br>
+          Découvrez bientôt notre Pass Premium pour accéder à des fonctionnalités exclusives et enrichir votre expérience de jeu !
+        </div>
+        <button class="premium-btn" onclick="openPremiumPopup()">🔒 Bientôt disponible</button>
       </div>
+    </div>
 
-      <div class="phase">
-        <h3>🎨 PHASE 8 : Interface et design utilisateur</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Design moderne, responsive (mobile et desktop)</span></li>
-          <li><input type="checkbox"><span>Animation des véhicules sur la carte</span></li>
-          <li><input type="checkbox"><span>Mini-map, zoom/dézoom</span></li>
-          <li><input type="checkbox"><span>Panneaux interactifs : villes, véhicules, lignes</span></li>
-          <li><input type="checkbox"><span>Système de notifications</span></li>
-        </ul>
+    <!-- Popup Premium Pass -->
+    <div class="popup-overlay" id="premiumPopup">
+      <div class="popup-content">
+        <button class="popup-close" onclick="closePremiumPopup()">&times;</button>
+        
+        <div class="popup-header">
+          <div class="premium-badge">🚧 EN DÉVELOPPEMENT</div>
+          <h2 class="popup-title">Pass Premium</h2>
+          <p class="popup-subtitle">Aperçu du futur design</p>
+          <div style="background: rgba(245,158,11,0.1); border: 2px solid #f59e0b; border-radius: 8px; padding: 0.8rem; margin-top: 1rem;">
+            <p style="color: #78350f; font-size: 0.9rem; margin: 0; font-weight: 600;">
+              ⚠️ <strong>ATTENTION :</strong> Ce contenu est un exemple et ne représente pas les fonctionnalités finales du Pass Premium.
+            </p>
+          </div>
+        </div>
+        
+        <div class="premium-preview">
+          <h3 style="color: #92400e; margin-bottom: 1rem;">🌟 Fonctionnalités exclusives</h3>
+          <p style="color: #78350f; margin-bottom: 1.5rem;">Découvrez un aperçu des avantages premium qui arrivent bientôt !</p>
+        </div>
+        
+        <div class="premium-features">
+          <div class="feature-item">
+            <span class="feature-icon">🚀</span>
+            <span class="feature-text">Accès anticipé aux nouvelles fonctionnalités</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎨</span>
+            <span class="feature-text">Thèmes visuels exclusifs et personnalisation avancée</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">⚡</span>
+            <span class="feature-text">Bonus de progression et accélération de développement</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏆</span>
+            <span class="feature-text">Badges et récompenses exclusifs</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">💎</span>
+            <span class="feature-text">Support prioritaire et accès aux bêta-tests</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <span class="feature-text">Contenus et scénarios premium exclusifs</span>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <p style="color: #78350f; font-size: 0.9rem; font-style: italic;">
+            💡 Le Pass Premium sera disponible prochainement. Restez connecté pour plus d'informations !
+          </p>
+          <div style="background: rgba(255,255,255,0.8); border-radius: 8px; padding: 0.8rem; margin-top: 1rem;">
+            <p style="color: #78350f; font-size: 0.85rem; margin: 0; font-weight: 500;">
+              📝 <strong>Note :</strong> Les fonctionnalités affichées sont des exemples de ce qui pourrait être inclus. Le contenu final sera différent.
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="phase">
-        <h3>🌐 PHASE 9 (optionnel) : Extensions</h3>
-        <ul class="checklist">
-          <li><input type="checkbox"><span>Multijoueur (tour par tour ou en ligne)</span></li>
-          <li><input type="checkbox"><span>Recherche et développement (technologies, énergie propre)</span></li>
-          <li><input type="checkbox"><span>Éditeur de carte personnalisé</span></li>
-          <li><input type="checkbox"><span>Mode bac à sable, mode campagne/scénario</span></li>
-          <li><input type="checkbox"><span>Export en PWA (progressive web app)</span></li>
-        </ul>
+    <!-- Popup Historique des versions -->
+    <div class="version-popup-overlay" id="versionPopup">
+      <div class="version-popup-content">
+        <button class="version-popup-close" onclick="closeVersionPopup()">&times;</button>
+        
+        <!-- Frise chronologique -->
+        <div style="background: rgba(255,255,255,0.9); border: 2px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: #475569; font-size: 1.1rem; margin-bottom: 1rem; text-align: center;">📅 Frise chronologique</h3>
+          <div style="position: relative;">
+            <!-- Ligne de temps -->
+            <div style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #64748b, #94a3b8);"></div>
+            
+            <!-- Version V.0.1 -->
+            <div style="display: flex; align-items: center; margin-bottom: 1rem; position: relative;">
+              <div onmouseover="showVersionTooltip(event)" onmouseout="hideVersionTooltip()" style="width: 40px; height: 40px; background: linear-gradient(135deg, #64748b, #475569); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.8rem; margin-right: 1rem; box-shadow: 0 2px 8px rgba(100,116,139,0.3); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                V.0.1
+              </div>
+              <div style="flex: 1; margin-left: 1rem;">
+                <div style="color: #475569; font-weight: 600; font-size: 0.9rem;">Juillet 2025</div>
+                <div style="color: #64748b; font-size: 0.8rem;">Semaine 2</div>
+              </div>
+            </div>
+            
+
+            
+            <!-- Point de fin -->
+            <div style="display: flex; align-items: center; position: relative;">
+              <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #64748b; font-weight: 700; font-size: 0.8rem; margin-right: 1rem; box-shadow: 0 2px 8px rgba(226,232,240,0.3);">
+                ...
+              </div>
+              <div style="flex: 1; margin-left: 1rem;">
+                <div style="color: #64748b; font-weight: 600; font-size: 0.9rem;">Futures versions</div>
+                <div style="color: #94a3b8; font-size: 0.8rem;">À venir</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <p style="color: #64748b; font-size: 0.85rem; font-style: italic;">
+            🔄 Les futures versions seront ajoutées ici au fur et à mesure du développement.
+          </p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section>
-      <h2>✅ Résumé – Types de transport à gérer</h2>
-      <table>
-        <tr>
-          <th>Transport</th>
-          <th>Marchandises</th>
-          <th>Passagers</th>
-          <th>Local</th>
-          <th>Interurbain</th>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚛</span>Camion</td>
-          <td>✅</td>
-          <td>❌</td>
-          <td>✅</td>
-          <td>✅</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚢</span>Bateau</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>❌</td>
-          <td>✅</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">✈️</span>Avion</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>❌</td>
-          <td>✅</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚖</span>Taxi</td>
-          <td>❌</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>❌</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚌</span>Bus</td>
-          <td>❌</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>❌</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚗</span>Covoiturage</td>
-          <td>❌</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>✅</td>
-        </tr>
-        <tr>
-          <td><span class="emoji">🚄</span>Train</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>✅</td>
-          <td>✅</td>
-        </tr>
-      </table>
-    </section>
-  </main>
+    <div class="footer">
+      🚀 GlobalTransit Tycoon<br>
+      Connectez le monde. Contrôlez le flux. Créez l'avenir du transport
+    </div>
+  </div>
+
+  <!-- Bouton retour en haut -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Retour en haut">🌍</button>
+
+  <script>
+    // Navigation smooth scroll
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          const offset = 100; // Offset pour le menu fixe
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Popup Premium functions
+    function openPremiumPopup() {
+      const popup = document.getElementById('premiumPopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'flex';
+      navMenu.style.display = 'none'; // Masque le menu
+      document.body.style.overflow = 'hidden'; // Empêche le scroll de la page
+    }
+
+    function closePremiumPopup() {
+      const popup = document.getElementById('premiumPopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'none';
+      navMenu.style.display = 'flex'; // Remet le menu
+      document.body.style.overflow = 'auto'; // Réactive le scroll de la page
+    }
+
+    // Fermer la popup en cliquant sur l'overlay
+    document.getElementById('premiumPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePremiumPopup();
+      }
+    });
+
+    // Fermer la popup avec la touche Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closePremiumPopup();
+      }
+    });
+
+    // Bouton retour en haut
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Afficher/masquer le bouton selon le scroll
+    window.addEventListener('scroll', function() {
+      const scrollButton = document.querySelector('.scroll-to-top');
+      if (window.pageYOffset > 300) {
+        scrollButton.classList.add('show');
+      } else {
+        scrollButton.classList.remove('show');
+      }
+    });
+
+    // Popup Version functions
+    function openVersionPopup() {
+      const popup = document.getElementById('versionPopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'flex';
+      navMenu.style.display = 'none'; // Masque le menu
+      document.body.style.overflow = 'hidden'; // Empêche le scroll de la page
+    }
+
+    function closeVersionPopup() {
+      const popup = document.getElementById('versionPopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'none';
+      navMenu.style.display = 'flex'; // Remet le menu
+      document.body.style.overflow = 'auto'; // Réactive le scroll de la page
+    }
+
+    // Fermer la popup version en cliquant sur l'overlay
+    document.getElementById('versionPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVersionPopup();
+      }
+    });
+
+    // Fermer la popup version avec la touche Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeVersionPopup();
+      }
+    });
+
+
+
+    // Fonctions pour le tooltip des versions
+    function showVersionTooltip(event) {
+      const tooltip = document.getElementById('versionTooltip');
+      const rect = event.target.getBoundingClientRect();
+      
+      tooltip.style.left = (rect.right + 20) + 'px';
+      tooltip.style.top = (rect.top + rect.height/2 - 50) + 'px';
+      tooltip.classList.add('show');
+    }
+
+    function hideVersionTooltip() {
+      const tooltip = document.getElementById('versionTooltip');
+      tooltip.classList.remove('show');
+    }
+
+
+
+    // Popup de bienvenue
+    function showWelcomePopup() {
+      const popup = document.getElementById('welcomePopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'flex';
+      navMenu.style.display = 'none';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWelcomePopup() {
+      const popup = document.getElementById('welcomePopup');
+      const navMenu = document.querySelector('.nav-menu');
+      popup.style.display = 'none';
+      navMenu.style.display = 'flex';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Afficher la popup de bienvenue au chargement de la page
+    window.addEventListener('load', function() {
+      setTimeout(showWelcomePopup, 500);
+    });
+
+    // Fermer la popup de bienvenue avec la touche Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeWelcomePopup();
+      }
+    });
+  </script>
 </body>
 </html> 
