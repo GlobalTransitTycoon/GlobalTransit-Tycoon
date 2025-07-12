@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🧭 Roadmap – Jeu de Gestion de Transport</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: url('Fond d\'écran roadmap.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(241,245,249,0.5);
+      z-index: 0;
+      pointer-events: none;
+    }
+    main, header {
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      background: #2563eb;
+      color: #fff;
+      padding: 2rem 1rem 1rem 1rem;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+    }
+    header h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(30,40,90,0.10);
+      padding: 2rem 1.5rem;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      color: #2563eb;
+      margin-top: 0;
+      font-size: 1.4rem;
+      border-left: 4px solid #2563eb;
+      padding-left: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    ul, ol {
+      margin: 0 0 1rem 1.5rem;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+    .phase {
+      background: #e0e7ff;
+      border-left: 6px solid #2563eb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .phase:hover {
+      box-shadow: 0 6px 24px rgba(37,99,235,0.13);
+      background: #dbeafe;
+    }
+    .phase h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1a237e;
+    }
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+    .checklist li {
+      position: relative;
+      padding-left: 2.2em;
+      margin-bottom: 0.4em;
+      display: flex;
+      align-items: center;
+      transition: background 0.3s, color 0.3s;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .checklist li:hover {
+      background: #dbeafe;
+    }
+    .checklist input[type="checkbox"] {
+      position: absolute;
+      left: 0;
+      width: 1.3em;
+      height: 1.3em;
+      accent-color: #2563eb;
+      margin-right: 0.7em;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(30,40,90,0.08);
+      transition: box-shadow 0.2s, border 0.2s;
+      border: 2px solid #93c5fd;
+      background: #fff;
+    }
+    .checklist input[type="checkbox"]:hover {
+      box-shadow: 0 0 0 3px #b3baf7;
+      border: 2px solid #3949ab;
+    }
+    .checklist input[type="checkbox"]:checked {
+      accent-color: #22c55e;
+      border: 2px solid #22c55e;
+      background: #dcfce7;
+    }
+    .checklist input[type="checkbox"]:focus {
+      outline: 2px solid #facc15;
+      outline-offset: 2px;
+    }
+    .checklist input[type="checkbox"]:checked + span {
+      color: #43a047;
+      text-decoration: line-through;
+    }
+    .checklist li.checked {
+      background: #dcfce7;
+      color: #22c55e;
+      text-decoration: line-through;
+    }
+    .checklist li span {
+      transition: color 0.3s, text-decoration 0.3s;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: #f8fafc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 0.6em 0.4em;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    th {
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .emoji {
+      font-size: 1.2em;
+      margin-right: 0.3em;
+    }
+    .next-step {
+      background: #fef9c3;
+      border-left: 6px solid #facc15;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-top: 2rem;
+    }
+    .next-step ul {
+      margin: 0.5rem 0 0 1.5rem;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem 0.3rem;
+      }
+      table, th, td {
+        font-size: 0.95em;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.checklist input[type="checkbox"]').forEach(function(checkbox) {
+        function updateChecked() {
+          if (checkbox.checked) {
+            checkbox.parentElement.classList.add('checked');
+          } else {
+            checkbox.parentElement.classList.remove('checked');
+          }
+        }
+        checkbox.addEventListener('change', updateChecked);
+        // Initial state
+        updateChecked();
+      });
+    });
+  </script>
+</head>
+<body>
+  <header style="display: flex; align-items: center; gap: 1.2rem; position: relative;">
+    <img src="Logo.png" alt="Logo GlobalTransit Tycoon" style="height:80px;box-shadow:0 2px 12px rgba(30,40,90,0.10);border-radius:16px;background:#fff;flex-shrink:0;">
+    <div style="flex:1;">
+      <h1 style="margin-top:0;margin-bottom:0.5rem;text-align:center;">🧭 Roadmap complète – Jeu de Gestion de Transport</h1>
+      <p style="margin:0;text-align:center;">Plan de développement pour un jeu de gestion de réseaux de transport (marchandises & passagers)</p>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2>🎯 Objectif du jeu</h2>
+      <p>
+        Le joueur incarne un gestionnaire de réseaux de transport. Il doit construire, développer et optimiser des infrastructures pour transporter efficacement des marchandises et des personnes à travers une carte composée de villes, ports, gares et aéroports.
+      </p>
+    </section>
+
+    <section>
+      <h2>⚙️ Technologies principales</h2>
+      <ul>
+        <li><b>HTML</b> : structure du jeu</li>
+        <li><b>CSS</b> : interface graphique, design responsive</li>
+        <li><b>JavaScript</b> : logique du jeu, événements, simulation</li>
+        <li><i>(optionnel plus tard : localStorage, IndexedDB ou backend pour sauvegarder)</i></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📌 Phases de développement</h2>
+
+      <div class="phase">
+        <h3>🏗️ PHASE 1 : Base du jeu (Fondations)</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Page de démarrage avec menu : "Nouvelle partie", "Charger", "Options"</span></li>
+          <li><input type="checkbox"><span>Carte interactive (grille, canvas ou DOM)</span></li>
+          <li><input type="checkbox"><span>Interface utilisateur (barre d’info, budget, temps, notifications)</span></li>
+          <li><input type="checkbox"><span>Système de temps : jours, semaines, années</span></li>
+          <li><input type="checkbox"><span>Système de monnaie et d'économie de base</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🚚 PHASE 2 : Transport de marchandises</h3>
+        <b>Types de transport :</b>
+        <ul>
+          <li>Camions : transport local</li>
+          <li>Bateaux cargo : international, inter-villes portuaires</li>
+          <li>Avions cargo : rapide, coûteux</li>
+          <li>Trains de fret : grande capacité, régional/national</li>
+        </ul>
+        <b>Fonctions :</b>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Créer entrepôts, ports, aéroports, terminaux ferroviaires</span></li>
+          <li><input type="checkbox"><span>Relier les points avec routes, rails, lignes maritimes ou aériennes</span></li>
+          <li><input type="checkbox"><span>Gérer la demande de ressources (ex : "bois vers Ville A")</span></li>
+          <li><input type="checkbox"><span>Affecter des véhicules à des trajets</span></li>
+          <li><input type="checkbox"><span>Coûts : carburant, maintenance, salaires, taxes</span></li>
+          <li><input type="checkbox"><span>Optimisation des itinéraires</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🧍 PHASE 3 : Transport de personnes</h3>
+        <b>Types de transport :</b>
+        <ul>
+          <li>Taxis : transport individuel, flexible</li>
+          <li>Bus : lignes urbaines fixes</li>
+          <li>Covoiturage : semi-automatisé</li>
+          <li>Avions passagers : vols commerciaux</li>
+          <li>Trains passagers : local (TER) ou grande vitesse (TGV)</li>
+        </ul>
+        <b>Fonctions :</b>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Construire arrêts de bus, gares ferroviaires, terminaux aériens</span></li>
+          <li><input type="checkbox"><span>Créer des lignes avec horaires et fréquences</span></li>
+          <li><input type="checkbox"><span>Gérer les tarifs des billets</span></li>
+          <li><input type="checkbox"><span>Suivre la satisfaction des passagers</span></li>
+          <li><input type="checkbox"><span>Réagir à la demande : heure de pointe, saisons, événements</span></li>
+          <li><input type="checkbox"><span>Gestion du confort, rapidité, ponctualité</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🏙️ PHASE 4 : Croissance des villes et économie</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Les villes croissent selon l’efficacité du réseau</span></li>
+          <li><input type="checkbox"><span>Plus de population = plus de demande en transport</span></li>
+          <li><input type="checkbox"><span>Revenus dynamiques selon activité et satisfaction</span></li>
+          <li><input type="checkbox"><span>Subventions, impôts, concurrence, inflation</span></li>
+          <li><input type="checkbox"><span>Amélioration des infrastructures : vitesse, capacité, coût</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🚄 PHASE 5 : Transport ferroviaire (marchandises et passagers)</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Construire des voies ferrées</span></li>
+          <li><input type="checkbox"><span>Relier des gares et terminaux de fret</span></li>
+          <li><input type="checkbox"><span>Définir des lignes ferroviaires (express ou omnibus)</span></li>
+          <li><input type="checkbox"><span>Acheter et configurer des trains (vitesse, capacité)</span></li>
+          <li><input type="checkbox"><span>Maintenance du réseau (rails, gares, trains)</span></li>
+          <li><input type="checkbox"><span>Gestion du trafic et des priorités (ex : croisement, horaires)</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>📊 PHASE 6 : Statistiques & simulation avancée</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Graphiques de performance (revenus, flux de passagers, retards)</span></li>
+          <li><input type="checkbox"><span>Événements aléatoires : météo, pannes, grèves, pics de demande</span></li>
+          <li><input type="checkbox"><span>Système de réputation</span></li>
+          <li><input type="checkbox"><span>Objectifs et missions (ex : “Relier 3 villes par train”)</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>💾 PHASE 7 : Sauvegarde, chargement et persistance</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Système de sauvegarde automatique ou manuel (localStorage)</span></li>
+          <li><input type="checkbox"><span>Chargement de partie</span></li>
+          <li><input type="checkbox"><span>Export/import des parties en JSON</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🎨 PHASE 8 : Interface et design utilisateur</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Design moderne, responsive (mobile et desktop)</span></li>
+          <li><input type="checkbox"><span>Animation des véhicules sur la carte</span></li>
+          <li><input type="checkbox"><span>Mini-map, zoom/dézoom</span></li>
+          <li><input type="checkbox"><span>Panneaux interactifs : villes, véhicules, lignes</span></li>
+          <li><input type="checkbox"><span>Système de notifications</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>🌐 PHASE 9 (optionnel) : Extensions</h3>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Multijoueur (tour par tour ou en ligne)</span></li>
+          <li><input type="checkbox"><span>Recherche et développement (technologies, énergie propre)</span></li>
+          <li><input type="checkbox"><span>Éditeur de carte personnalisé</span></li>
+          <li><input type="checkbox"><span>Mode bac à sable, mode campagne/scénario</span></li>
+          <li><input type="checkbox"><span>Export en PWA (progressive web app)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>✅ Résumé – Types de transport à gérer</h2>
+      <table>
+        <tr>
+          <th>Transport</th>
+          <th>Marchandises</th>
+          <th>Passagers</th>
+          <th>Local</th>
+          <th>Interurbain</th>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚛</span>Camion</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚢</span>Bateau</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">✈️</span>Avion</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚖</span>Taxi</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚌</span>Bus</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚗</span>Covoiturage</td>
+          <td>❌</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><span class="emoji">🚄</span>Train</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="next-step">
+      <h2>🧱 Prochaine étape proposée</h2>
+      <p>Souhaites-tu :</p>
+      <ul>
+        <li>1. Un prototype HTML/CSS/JS de carte et système de construction ?</li>
+        <li>2. Un mini module fonctionnel (ex : gestion de ligne de bus ou train) ?</li>
+        <li>3. Une interface de gestion (budget, flotte, lignes, statistiques) ?</li>
+        <li>4. Un système de placement de gares et connexion ferroviaire ?</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html> 
