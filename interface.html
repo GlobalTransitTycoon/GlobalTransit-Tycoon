@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interface de jeu – GlobalTransit Tycoon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .game-container {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 60px 1fr 40px;
+      grid-template-columns: 250px 1fr 300px;
+      grid-template-areas: 
+        "header header header"
+        "sidebar main panel"
+        "footer footer footer";
+    }
+    
+    /* Header */
+    .header {
+      grid-area: header;
+      background: #2d2d2d;
+      border-bottom: 2px solid #404040;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      justify-content: space-between;
+    }
+    
+    .game-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    
+    .game-stats {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    
+    .stat-value {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      grid-area: sidebar;
+      background: #2d2d2d;
+      border-right: 1px solid #404040;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
+    }
+    
+    .menu-section {
+      margin-bottom: 25px;
+    }
+    
+    .menu-title {
+      color: #4CAF50;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #404040;
+      padding-bottom: 5px;
+    }
+    
+    .menu-item {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #3d3d3d;
+      border: 1px solid #404040;
+      border-radius: 5px;
+      color: #ffffff;
+      text-decoration: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .menu-item:hover {
+      background: #4d4d4d;
+    }
+    
+    /* Main Area */
+    .main-area {
+      grid-area: main;
+      background: #1a1a1a;
+      padding: 20px;
+    }
+    
+    /* Panel */
+    .panel {
+      grid-area: panel;
+      background: #2d2d2d;
+      border-left: 1px solid #404040;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
+    }
+    
+    .panel-section {
+      margin-bottom: 25px;
+    }
+    
+    .panel-title {
+      color: #4CAF50;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .info-card {
+      background: #3d3d3d;
+      border: 1px solid #404040;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .info-card h4 {
+      color: #b0b0b0;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .info-card p {
+      color: #4CAF50;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    /* Footer */
+    .footer {
+      grid-area: footer;
+      background: #2d2d2d;
+      border-top: 1px solid #404040;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 14px;
+      color: #b0b0b0;
+    }
+    
+    .footer-stats {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .footer-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    /* Bouton retour */
+    .back-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    
+    .back-btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="game-title">🎮 GlobalTransit Tycoon</div>
+      
+      <div class="game-stats">
+        <div class="stat">
+          <span>💰</span>
+          <span>Budget:</span>
+          <span class="stat-value">€1,000,000</span>
+        </div>
+        <div class="stat">
+          <span>⏰</span>
+          <span>Jour:</span>
+          <span class="stat-value">1</span>
+        </div>
+        <div class="stat">
+          <span>📊</span>
+          <span>Score:</span>
+          <span class="stat-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="menu-section">
+        <h3 class="menu-title">🏗️ Construction</h3>
+        <button class="menu-item">🛣️ Route</button>
+        <button class="menu-item">🚄 Voie ferrée</button>
+        <button class="menu-item">🚌 Arrêt de bus</button>
+        <button class="menu-item">🚉 Gare</button>
+        <button class="menu-item">✈️ Aéroport</button>
+        <button class="menu-item">🚢 Port</button>
+      </div>
+
+      <div class="menu-section">
+        <h3 class="menu-title">🚚 Transport</h3>
+        <button class="menu-item">🚛 Camions</button>
+        <button class="menu-item">🚌 Bus</button>
+        <button class="menu-item">🚄 Trains</button>
+        <button class="menu-item">✈️ Avions</button>
+        <button class="menu-item">🚢 Bateaux</button>
+      </div>
+
+      <div class="menu-section">
+        <h3 class="menu-title">📊 Gestion</h3>
+        <button class="menu-item">💰 Finances</button>
+        <button class="menu-item">📈 Statistiques</button>
+        <button class="menu-item">⚙️ Paramètres</button>
+      </div>
+
+      <div class="menu-section">
+        <h3 class="menu-title">🎮 Menu</h3>
+        <a href="index.html" class="menu-item">🏠 Accueil</a>
+        <a href="roadmap.html" class="menu-item">📋 Roadmap</a>
+      </div>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="main-area">
+      <div style="padding: 20px;">
+        <h2 style="color: #4CAF50; margin-bottom: 20px;">🚀 Interface de Jeu</h2>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">📋 Section 1</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Cette section contient des informations importantes sur le jeu. Vous pouvez maintenant faire défiler la page pour voir tout le contenu.</p>
+        </div>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">🎮 Section 2</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Une autre section pour démontrer le défilement. L'interface est maintenant plus flexible et permet de naviguer facilement.</p>
+        </div>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">🏗️ Section 3</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Section de construction et de développement. Ici vous pourrez gérer vos infrastructures de transport.</p>
+        </div>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">🚚 Section 4</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Gestion des véhicules et des flottes. Contrôlez vos camions, bus, trains et avions.</p>
+        </div>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">📊 Section 5</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Statistiques et analyses. Suivez vos performances et votre progression dans le jeu.</p>
+        </div>
+        
+        <div style="background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: #ffffff; margin-bottom: 15px;">🎯 Section 6</h3>
+          <p style="color: #b0b0b0; line-height: 1.6;">Objectifs et missions. Accomplissez des défis pour débloquer de nouvelles fonctionnalités.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Panel -->
+    <aside class="panel">
+      <div class="panel-section">
+        <h3 class="panel-title">📊 Statistiques</h3>
+        <div class="info-card">
+          <h4>Véhicules actifs</h4>
+          <p>0</p>
+        </div>
+        <div class="info-card">
+          <h4>Villes connectées</h4>
+          <p>0</p>
+        </div>
+        <div class="info-card">
+          <h4>Passagers transportés</h4>
+          <p>0</p>
+        </div>
+        <div class="info-card">
+          <h4>Marchandises transportées</h4>
+          <p>0</p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="panel-title">🎯 Objectifs</h3>
+        <div class="info-card">
+          <h4>Objectif principal</h4>
+          <p>Relier 2 villes</p>
+        </div>
+        <div class="info-card">
+          <h4>Progression</h4>
+          <p>0%</p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="panel-title">⚡ Actions rapides</h3>
+        <button class="menu-item">⏸️ Pause</button>
+        <button class="menu-item">⚡ Vitesse x2</button>
+        <button class="menu-item">📷 Vue caméra</button>
+      </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-stats">
+        <div class="footer-stat">
+          <span>🚛</span>
+          <span>Véhicules: 0</span>
+        </div>
+        <div class="footer-stat">
+          <span>🏙️</span>
+          <span>Villes: 0</span>
+        </div>
+        <div class="footer-stat">
+          <span>👥</span>
+          <span>Passagers: 0</span>
+        </div>
+      </div>
+      <div class="footer-stat">
+        <span>🎯</span>
+        <span>Objectif: Relier 2 villes</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Fonctions de base pour l'interface
+    function selectTool(tool) {
+      console.log('Outil sélectionné:', tool);
+      alert('Outil sélectionné: ' + tool);
+    }
+    
+    function selectVehicle(vehicle) {
+      console.log('Véhicule sélectionné:', vehicle);
+      alert('Véhicule sélectionné: ' + vehicle);
+    }
+    
+    // Ajouter les événements aux boutons
+    document.addEventListener('DOMContentLoaded', function() {
+      // Boutons de construction
+      const constructionButtons = document.querySelectorAll('.menu-section:nth-child(1) .menu-item');
+      constructionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          selectTool(this.textContent.trim());
+        });
+      });
+      
+      // Boutons de transport
+      const transportButtons = document.querySelectorAll('.menu-section:nth-child(2) .menu-item');
+      transportButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          selectVehicle(this.textContent.trim());
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
